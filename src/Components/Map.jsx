@@ -1,59 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+// src/MapComponent.js
+import React, { useEffect, useRef, useState } from 'react';
+import { MapsScript } from "./MapsScript";
 
-const mapContainerStyle = {
-  width: '100%',
-  height: '100%',
-};
-
-const libraries = ['places'];
-
-const MapComponent = ({ apiKey, locationName }) => {
-  const [center, setCenter] = useState(null);
-
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-    libraries,
-  });
+const Map = ({ apiKey, destination }) => {
+  const mapRef = useRef(null);
+  const [currentPosition, setCurrentPosition] = useState(null);
 
   useEffect(() => {
-    if (isLoaded && window.google) {
-      const geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode({ address: locationName }, (results, status) => {
-        if (status === 'OK') {
-          setCenter({
-            lat: results[0].geometry.location.lat(),
-            lng: results[0].geometry.location.lng(),
-          });
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCurrentPosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+      },
+      (error) => {
+        console.error("Error fetching the user's location: ", error);
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (currentPosition) {
+      MapsScript().then((google) => {
+        const map = new google.maps.Map(mapRef.current, {
+          center: currentPosition,
+          zoom: 15
+        });
+
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        const request = {
+          origin: currentPosition,
+          destination: destination,
+          travelMode: 'DRIVING'
+        };
+
+        directionsService.route(request, (result, status) => {
+          if (status === 'OK') {
+            directionsRenderer.setDirections(result);
+          } else {
+            console.error('Directions request failed due to ', status);
+          }
+        });
+      }).catch(error => {
+        console.error("Failed to load Google Maps API: ", error);
       });
     }
-  }, [isLoaded, locationName]);
-
-  if (loadError) {
-    return <div>Error loading maps</div>;
-  }
-
-  if (!isLoaded) {
-    return <div>Loading Maps...</div>;
-  }
+  }, [currentPosition, apiKey, destination]);
 
   return (
-    <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={10}>
-      {center && <Marker position={center} />}
-    </GoogleMap>
+    <div className='h-full'>
+      <div ref={mapRef} style={{ height: '100%', width: '100%' }} ></div>
+    </div>
   );
 };
 
-const Maps = (props) => {
-
-  const apiKey = process.env.REACT_APP_API_MAPS; // Replace with your actual API key
-  console.log(apiKey);
-  const locationName = props.place;
-
-  return <MapComponent apiKey={apiKey} locationName={locationName} />;
-};
-
-export default Maps;
+export default Map;
