@@ -16,6 +16,7 @@ const Collapsible = ({ items }) => {
           isOpen={openIndex === index}
           day={item.day}
           title={item.title}
+          description={item.description}
           content={item.content}
           location={item.locations}
           onToggle={() => handleToggle(index)}
