@@ -51,7 +51,6 @@ export default function Destination() {
               value={place}
               onChange={(e) => {
                 setPlace(e.target.value);
-                require;
               }}
               className="border-4 border-double border-gray-400 p-2 rounded bg-black w-5/6 md:w-1/3 md:p-3"
               required
