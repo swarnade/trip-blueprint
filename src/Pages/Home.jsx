@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 import image from "../assets/main.jpg"
 function App() {
   return (
-    <div className="bg-slate-50 w-screen h-screen">
-      <div className=" w-screen h-1/6">a</div>
+    <div className="bg-black w-screen h-screen">
+      <div className=" w-screen h-1/6"></div>
       <div className=" w-screen h-4/6 flex flex-col-reverse md:flex-row">
         <div className="w-full md:w-1/2  h-full">
-          <p className="text-black md:text-[55px] px-4 Card-Title md:mb-4 ">
+          <p className="text-white md:text-[55px] px-4 Card-Title md:mb-4 ">
             Unlock the World with AI-Powered Travel
           </p>
-          <p className="text-black md:text-[25px] px-4 py-4 md:mb-4">
+          <p className="text-white md:text-[25px] px-4 py-4 md:mb-4">
             Discover the best destinations, plan your dream trips, and get
             personalized recommendations with our AI-powered travel app.
           </p>
@@ -26,9 +26,12 @@ function App() {
         </div>
       </div>
       <div className=" w-screen h-1/6 grid place-content-center">
-        <p className="text-xl md:text-2xl text-black">
+      <div className="h-2/10 text-center Card-Title text-xl">
+        <p>Trip BluePrint | Developed By Swarnadeep Saha Poddar</p>
+        </div>
+        {/* <p className="text-xl md:text-2xl text-white">
           Developed By Swarnadeep Saha Poddar
-        </p>
+        </p> */}
       </div>
     </div>
   );
