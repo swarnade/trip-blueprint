@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { differenceInDays, parseISO } from "date-fns";
+import "../Components/design.css";
 export default function Destination() {
   //Use Effect Hooks
   const [place, setPlace] = useState("");
@@ -39,61 +40,71 @@ export default function Destination() {
   };
   return (
     <>
-      <div className="bg-white w-screen h-screen text-black">
-        <h1 className="text-center">Plan Your Next Adventure</h1>
-        <div className="md:mt-10 md:mb-10 w-screen text-center">
-          <p className="">Place</p>
-          <input
-            value={place}
-            onChange={(e) => {
-              setPlace(e.target.value);
-              require;
-            }}
-            className="border-2 border-solid border-gray-400 p-2 rounded bg-white w-full md:w-1/3 md:p-3"
-            required
-          ></input>
+      <div className="bg-black w-screen h-screen text-white">
+        <div className="h-2/10">
+          <h1 className="text-center">Trip Blueprint</h1>
         </div>
-        <div className="md:mt-10 md:mb-10 w-screen text-center">
-          <label>
-            Check-in Date:
+        <div className="h-7/10 mt-5">
+          <div className=" md:mb-10         w-screen text-center mt-5 mb-5">
+            <p className="description-title text-2xl">Place</p>
             <input
-              className="bg-white"
-              type="date"
-              value={checkInDate}
-              onChange={(e) => setCheckInDate(e.target.value)}
-            />
-          </label>
-        </div>
-        <div className="md:mt-10 md:mb-10 w-screen text-center">
-          <label>
-            Check-out Date:
+              value={place}
+              onChange={(e) => {
+                setPlace(e.target.value);
+                require;
+              }}
+              className="border-4 border-double border-gray-400 p-2 rounded bg-black w-5/6 md:w-1/3 md:p-3"
+              required
+              placeholder="Place to Travel"
+            ></input>
+          </div>
+          <div className="md:mt-10 md:mb-10 w-screen text-center mt-5 mb-5">
+            <label className="text-2xl description-title">
+              Check-in Date:
+              <br />
+              <input
+                className="bg-black border-4 border-double border-gray-400 p-3 rounded-xl"
+                type="date"
+                value={checkInDate}
+                onChange={(e) => setCheckInDate(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="md:mt-10 md:mb-10 w-screen text-center mt-5 mb-5">
+            <label className="text-2xl description-title">
+              Check-out Date:
+              <br />
+              <input
+                className=" bg-black border-4 border-double border-gray-400 p-3 rounded-xl"
+                type="date"
+                value={checkOutDate}
+                onChange={(e) => setCheckOutDate(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="md:mt-10 md:mb-10 w-screen text-center mt-5 mb-5">
+            <p className="description-title text-2xl">Person</p>
             <input
-              className="bg-white"
-              type="date"
-              value={checkOutDate}
-              onChange={(e) => setCheckOutDate(e.target.value)}
-            />
-          </label>
+              value={person}
+              onChange={(e) => {
+                setPerson(e.target.value);
+              }}
+              className="border-4 border-double border-gray-400 p-2 rounded bg-black w-5/6 md:w-1/3 md:p-3"
+              required
+              placeholder="Number of Person"
+            ></input>
+          </div>
+          <div className="md:mt-10 md:mb-10 w-screen text-center mt-5 mb-5">
+            <button
+              onClick={btn}
+              className="bg-white text-black m-2 p-4 rounded-lg pl-8  pr-8 Location-Heading">
+              Plan Trip
+            </button>
+          </div>
         </div>
-        <div className="md:mt-10 md:mb-10 w-screen text-center">
-          <p>Person</p>
-          <input
-            value={person}
-            onChange={(e) => {
-              setPerson(e.target.value);
-            }}
-            className="border-2 border-solid border-gray-400 p-2 rounded bg-white w-full md:w-1/3 md:p-3"
-            required
-          ></input>
-        </div>
-        <div className="md:mt-10 md:mb-10 w-screen text-center">
-          <button
-            onClick={btn}
-            className="bg-slate-600 m-2 p-4 rounded-lg pl-8  pr-8"
-          >
-            Plan Trip
-          </button>
-        </div>
+        {/* <div className="h-2/10 text-center Card-Title text-xl">
+        <p>Trip BluePrint | Developed By Swarnadeep Saha Poddar</p>
+        </div> */}
       </div>
     </>
   );

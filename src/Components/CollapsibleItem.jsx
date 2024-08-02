@@ -1,5 +1,7 @@
-import './design.css'
-import React from "react";
+import "./design.css";
+import React, { useEffect, useState } from "react";
+import Location from "./Location";
+const bracket = ">";
 const CollapsibleItem = ({
   isOpen,
   title,
@@ -7,9 +9,14 @@ const CollapsibleItem = ({
   onToggle,
   day,
   location,
-  description
+  description,
 }) => {
-    console.log(location)
+  console.log(location);
+  const [color_main, setColor] = useState("");
+  useEffect(() => {
+    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    setColor(randomColor);
+  }, []);
   return (
     <div className="border-b">
       <div
@@ -18,21 +25,23 @@ const CollapsibleItem = ({
       >
         <div className="flex items-center">
           {isOpen ? "" : ""}
-          <span className="ml-2 text-xl Card-Title">
-            {day} : {title}
+          <span
+            className="text-xl Card-Title mt-5 mb-5 "
+            style={{ color: color_main }}
+          >
+            {bracket} {day} : {title}
           </span>
         </div>
       </div>
       {isOpen && (
-        <div className="p-4">
-                      <p className="Card-Description"><span className='text-3xl'>D</span>escription:-{description}</p>
+        <div className="p-4 pl-8">
+          <p className="Card-Description" style={{color:"#12b5cb"}}>
+            <span className="text-3xl" style={{color:"#1518D6"}}>D</span>escription:-{description}
+          </p>
           {
             <ul>
               {location.map((location, locIndex) => (
-                <li key={locIndex}>
-                  {location.name} - {location.type} - {location.description} -{" "}
-                  {location.time}
-                </li>
+                <Location location={location} locIndex={locIndex}></Location>
               ))}
             </ul>
           }

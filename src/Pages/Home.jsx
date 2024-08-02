@@ -1,15 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import image from "../assets/main.jpg"
 function App() {
   return (
     <div className="bg-slate-50 w-screen h-screen">
       <div className=" w-screen h-1/6">a</div>
       <div className=" w-screen h-4/6 flex flex-col-reverse md:flex-row">
         <div className="w-full md:w-1/2  h-full">
-          <p className="text-black md:text-[60px] px-4">
+          <p className="text-black md:text-[55px] px-4 Card-Title md:mb-4 ">
             Unlock the World with AI-Powered Travel
           </p>
-          <p className="text-black md:text-[30px] px-4 py-4">
+          <p className="text-black md:text-[25px] px-4 py-4 md:mb-4">
             Discover the best destinations, plan your dream trips, and get
             personalized recommendations with our AI-powered travel app.
           </p>
@@ -20,7 +21,7 @@ function App() {
         <div className="w-full md:w-1/2  h-full grid place-content-center">
           <img
             className="rounded-s-3xl "
-            src="https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"
+            src={image}
           />
         </div>
       </div>
