@@ -33,8 +33,8 @@ Check out the live demo of Trip Blueprint: [Trip Blueprint](https://tripblueprin
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/swarnade/trip-bluprint.git
-   cd trip-bluprint
+   git clone https://github.com/swarnade/trip-blueprint.git
+   cd trip-blueprint
    ```
 
 2. **Install dependencies:**
