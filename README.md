@@ -46,7 +46,7 @@ Check out the live demo of Trip Blueprint: [Trip Blueprint](https://tripblueprin
 3. **Add your API keys:**
 
    - Create a `.env` file in the root directory.
-   - Add your Google Maps API key and Gemini API key to the `.env` file:
+   - Add your Google Maps API key and Gemini API Using AI Studio/Vertex AI key to the `.env` file:
 
      ```
      REACT_APP_API_GEMINI
@@ -60,6 +60,49 @@ Check out the live demo of Trip Blueprint: [Trip Blueprint](https://tripblueprin
    ```
 
    Your application should now be running on `http://localhost:5173`.
+
+## Adding Vertex Ai [Optional]
+1. **Go To Google Cloud Console**
+2. **Enable Vertex Ai APIs**
+3. **Refer To Plans.jsx**
+4. **Install Vertex Ai**
+```sh
+       npm install @google-cloud/vertexai
+```
+5. **Replace This Code With Gemini Ai Studio Code Snippet**
+```sh
+const {VertexAI} = require('@google-cloud/vertexai');
+
+async function generate_from_text_input(projectId = 'PROJECT_ID') {
+  const vertexAI = new VertexAI({project: projectId, location: ''});
+
+  const generativeModel = vertexAI.getGenerativeModel({
+    model: 'gemini-1.5-flash-001',
+  });
+
+    const jsonnn = '```json';
+    const prompt = `Make a ${props.date} Days & ${props.person} Person Tour Plan For ${props.place}  In Format "[{
+      "day": "",
+      "title": "",
+      "description": "",
+      "locations": [
+        {
+          "name": "",
+          "type": "",
+          "description": "",
+          "time": ""
+        }
+      ],
+      "notes": ""
+    }] " Format Such That It Directly Compatible In Map Function Of JS And Only Directly The Json Only & And Make Sure Not To Print "${jsonnn}"`;
+
+  const resp = await generativeModel.generateContent(prompt);
+  const contentResponse = await resp.response;
+  const data = eval(contentResponse);
+  setOut(data);
+}
+```
+6. **Setup Ur Cloud Credentials In .env File**
 
 ## Usage
 
@@ -85,6 +128,7 @@ Check out the live demo of Trip Blueprint: [Trip Blueprint](https://tripblueprin
 
 - **Frontend:** React, HTML, CSS, JavaScript
 - **APIs:** Google Maps API, Gemini API
+- **Gemini APis:** The Project Can Be Able To Utlize Both Ai Studio And Vertex Ai Version Of Vertex Apis
 - **State Management:** Redux (if used)
 - **Routing:** React Router (if used)
 
