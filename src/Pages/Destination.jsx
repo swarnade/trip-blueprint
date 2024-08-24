@@ -84,6 +84,7 @@ export default function Destination() {
           <div className="md:mt-10 md:mb-10 w-screen text-center mt-5 mb-5">
             <p className="description-title text-2xl">Person</p>
             <input
+              type="number"
               value={person}
               onChange={(e) => {
                 setPerson(e.target.value);
