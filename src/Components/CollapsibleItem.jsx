@@ -11,7 +11,6 @@ const CollapsibleItem = ({
   location,
   description,
 }) => {
-  console.log(location);
   const [color_main, setColor] = useState("");
   useEffect(() => {
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;

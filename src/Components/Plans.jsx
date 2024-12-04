@@ -12,24 +12,34 @@ export default function Plans(props) {
       try {
         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const jsonnn = '```json';
-        const prompt = `Make a ${props.date} Days & ${props.person} Person Tour Plan For ${props.place}  In Format "[{
-          "day": "",
-          "title": "",
-          "description": "",
-          "locations": [
-            {
-              "name": "",
-              "type": "",
-              "description": "",
-              "time": ""
-            }
-          ],
-          "notes": ""
-        }] " Format Such That It Directly Compatible In Map Function Of JS And Only Directly The Json Only & And Make Sure Not To Print "${jsonnn}"`;
+        const prompt = `Create a detailed ${props.date}-day tour plan for ${props.person} person(s) visiting ${props.place}. The plan should be structured in the following raw JSON format, suitable for direct use with JavaScript's map function:
+
+        [
+          {
+            "day": "",
+            "title": "",
+            "description": "",
+            "locations": [
+              {
+                "name": "",
+                "type": "",
+                "description": "",
+                "time": ""
+              }
+            ],
+            "notes": ""
+          }
+        ]
+        
+        Important Notes:
+        1. Ensure the JSON is valid and does not include any additional formatting such as \`\`\`json or any other code block markers.
+        2. The output should only contain the raw JSON content.
+        3. Maintain a consistent structure across all days with realistic and concise descriptions.
+        4. Avoid adding any extraneous text or comments outside the JSON object.`
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = await response.text();
-        const data = eval(text);
+        const data = JSON.parse(text);
         setOut(data);
       } catch (error) {
         console.error("Error fetching data:", error);
