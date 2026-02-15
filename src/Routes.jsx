@@ -1,7 +1,7 @@
 import Home from "./Pages/Home"
 import Destination from "./Pages/Destination";
 import Display from "./Pages/Display";
-import History from "./Components/History";
+import Login from "./Pages/Login"
 const Routes=[
 {
     path:"/",
@@ -16,8 +16,8 @@ const Routes=[
     element:<Display />
 },
 {
-    path:'/history',
-    element:<History />
+    path:'/login',
+    element:<Login />
 }
 ]
 
