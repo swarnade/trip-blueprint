@@ -1,29 +1,27 @@
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-export default function Login() {
+
+export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+
   const handleSuccess = async (credentialResponse) => {
+
     try {
-      console.log(credentialResponse.credential);
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/auth/login`,
-        {
-          token: credentialResponse.credential,
-        },
-        { withCredentials: true },
-      );
-      navigate("/dashboard");
-    } catch (err) {
-      if (err.response?.status === 404) {
-        alert("User not found. Please sign up first.");
-        navigate("/signup");
+      console.log(credentialResponse.credential)
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, {
+        token: credentialResponse.credential,
+      });
+      console.log(response);
+      if(response.status === 201) {
+        alert("Signup successful! You can now log in.");
       } else {
-        alert("Failed to log in. Please try again.");
+        setError("Signup failed");
       }
+    } catch (err) {
+      alert("Failed to sign up. Please try again.");
+      setError(err.response?.data?.err || "Signup failed");
     } finally {
       setLoading(false);
     }
