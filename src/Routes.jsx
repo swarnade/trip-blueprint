@@ -4,6 +4,7 @@ import Display from "./Pages/Display";
 import Login from "./Pages/Login"
 import SignUp from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
+import TripPlan from "./Pages/TripPlan";
 const Routes=[
 {
     path:"/",
@@ -28,6 +29,10 @@ const Routes=[
 {
     path:'/dashboard',
     element:<Dashboard />
+},
+{
+    path:'/tripplan',
+    element:<TripPlan />
 }
 ]
 
